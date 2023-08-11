@@ -4,33 +4,32 @@ var start = function () {
     ' You choose first, then the computer will choose too.');
 };
 
-function getUserChoice (userInput) {
+function getUserChoice (userChoice) {
     console.log('Ready? Here we go!');
-    userInput = prompt('Choose one... Rock, Paper, or Scissors?').toLowerCase();
+    userChoice = prompt('Choose one... Rock, Paper, or Scissors?').toLowerCase();
 
-    if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
-        return userInput
+    if (userChoice === 'rock' || userChoice === 'paper' || userChoice === 'scissors') {
+        return userChoice
     } else {
-        console.log('That is not a valid option.')
-        return getUserChoice(userInput);
+        console.log('That is not a valid option.');
+        return getUserChoice(userChoice);
     }
 };
 
 function getComputerChoice () {
-    computerChoice = Math.floor(Math.random() * 2)
+    let computerChoice = Math.floor(Math.random() * 2);
 
     switch (computerChoice) {
         case 0:
-            console.log('computer: Rock!');
+            console.log('rock');
             break;
         case 1:
-            console.log('computer: Paper!');
+            console.log('paper');
             break;
         case 2:
-            console.log('computer: Scissors!');
+            console.log('scissors');
             break;
-    }
-};
+}};
 
 function youWon () {
     console.log('You won! wanna play again?');
@@ -42,18 +41,29 @@ function youLost () {
     // add options to start again or say "goodbye".
 }
 
-function determineWinner (userInput, computerChoice) {
-    if (userInput === 'rock' && computerChoice === 1, 
-        userInput === 'paper' && computerChoice === 2, 
-        userInput === 'scissors' && computerChoice === 0)  {
+function determineWinner (userChoice, computerChoice) {
+    //The computer wins.
+    if (userChoice === computerChoice) {
+        console.log('Thats a tie, play again!');
+        return getUserChoice(); }
+    else if (userChoice === 'rock' && computerChoice =='paper') {
+            return youLost(); }
+    else if (userChoice === 'paper' && computerChoice == 'scissors') {
+            return youLost(); }
+    else if (userChoice === 'scissors' && computerChoice == 'rock') {
         return youLost();
-    } else if (userInput === null || computerChoice === null) {
+    //If this function is called before userChoice or computerChoice.
+    } else if (userChoice === undefined){
         console.log('Someone has not played yet!');
         return getUserChoice();
+    } else if (computerChoice === undefined) {
+        console.log('The computer has not played...');
+        return getComputerChoice();
+    //There is a tie.
     } else {
         return youWon();
-    }
-};
+    }};
+
 
 // function playGame() {
 //     start();
